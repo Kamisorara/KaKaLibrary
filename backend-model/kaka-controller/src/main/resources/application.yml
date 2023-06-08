@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.36.10:3306/kaka_library?useUnicode=true&Encoding=utf-8
+    username: root
+    password: 123456
+server:
+  port: 8080
