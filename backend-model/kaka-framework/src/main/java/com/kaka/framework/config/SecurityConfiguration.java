@@ -13,18 +13,33 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 import java.io.IOException;
 
+/**
+ * SpringSecurity配置
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((authorizeHttpRequests) ->
                         authorizeHttpRequests
+                                .requestMatchers("/sys/auth/login",
+                                        "/sys/auth/register"
+                                ).permitAll()
+                                // 其余的都需要权限校验
                                 .anyRequest()
                                 .authenticated()
                 )
@@ -45,7 +60,7 @@ public class SecurityConfiguration {
                                 exception
                                         .authenticationEntryPoint(this::onAuthenticationFailure)
                 )
-                .csrf(AbstractHttpConfigurer::disable);
+                .csrf(csrf -> csrf.disable());
         return http.build();
     }
 

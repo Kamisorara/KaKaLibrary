@@ -1,9 +1,9 @@
 package com.kaka.controller;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.ComponentScans;
 
 @SpringBootApplication
 @ComponentScan(
@@ -14,6 +14,7 @@ import org.springframework.context.annotation.ComponentScans;
                 "com.kaka.framework"
         }
 )
+@MapperScan("com.kaka.service.mapper")
 public class KakaControllerApplication {
 
     public static void main(String[] args) {

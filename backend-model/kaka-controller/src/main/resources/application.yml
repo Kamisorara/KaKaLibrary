@@ -1,8 +1,18 @@
 spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai #GMT+8
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.36.10:3306/kaka_library?useUnicode=true&Encoding=utf-8
+    url: jdbc:mysql://192.168.36.10:3306/kaka_library?useUnicode=true&Encoding=utf-8&serverTimezone=GMT%2B8
     username: root
     password: 123456
 server:
   port: 8080
+
+# mybatis 配置
+mybatis:
+  configuration:
+    # 开启驼峰法命名规范
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath*:/mapper/**/*.xml
