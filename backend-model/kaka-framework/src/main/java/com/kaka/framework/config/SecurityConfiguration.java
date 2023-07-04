@@ -30,7 +30,7 @@ public class SecurityConfiguration {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
+  
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
